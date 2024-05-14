@@ -1,0 +1,16 @@
+@import url('https://fonts.googleapis.com/css2?family=Agbalumo&display=swap');
+
+.navbar{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 8px 4%;
+}
+
+.navbar .logo {
+    width: 150px;
+    color: #cc5500;
+    font-family: "Agbalumo", system-ui;
+  font-weight: 400;
+  font-style: normal;
+}
