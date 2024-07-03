@@ -3,13 +3,16 @@ import "./Cart.css";
 import { StoreContext } from "../../context/StoreContext";
 import { useNavigate } from "react-router-dom";
 
-
 const Cart = () => {
-  const { cartItems, food_list, removeFromCart, getTotalCartAmount, url } = useContext(
-    StoreContext
-  );
+  const {
+    cartItems,
+    food_list,
+    removeFromCart,
+    getTotalCartAmount,
+    url
+  } = useContext(StoreContext);
 
-  const navigate = useNavigate()
+  const navigate = useNavigate();
   return (
     <div className="cart">
       <div className="cart-items">
@@ -22,13 +25,13 @@ const Cart = () => {
           <p>Remove</p>
         </div>
         <br />
-        <hr />
         {food_list.map((item, index) => {
-          if (cartItems[item._id]>0) {
+          if (cartItems[item._id] > 0) {
             return (
-              <div>
+              <div key={item._id}>
+                {" "}{/* or any other unique identifier */}
                 <div className="cart-items-title cart-items-item">
-                  <img src={url + "/images/"+item.image} alt="" />
+                  <img src={url + "/images/" + item.image} alt="" />
                   <p>
                     {item.name}
                   </p>
@@ -41,7 +44,9 @@ const Cart = () => {
                   <p>
                     ${item.price * cartItems[item._id]}
                   </p>
-                  <p onClick={()=> removeFromCart(item._id)} className="cross">x</p>
+                  <p onClick={() => removeFromCart(item._id)} className="cross">
+                    x
+                  </p>
                 </div>
               </div>
             );
@@ -54,33 +59,38 @@ const Cart = () => {
           <div>
             <div className="cart-total-details">
               <p>Subtotal</p>
-              <p>${getTotalCartAmount()}</p>
+              <p>
+                ${getTotalCartAmount()}
+              </p>
             </div>
             <hr />
             <div className="cart-total-details">
               <p>Delivery Fee</p>
-              <p>${getTotalCartAmount()===0?0:2}</p>
+              <p>
+                ${getTotalCartAmount() === 0 ? 0 : 2}
+              </p>
             </div>
             <hr />
             <div className="cart-total-details">
               <b>Total</b>
-              <b>${getTotalCartAmount()===0?0:getTotalCartAmount()}</b>
+              <b>
+                ${getTotalCartAmount() === 0 ? 0 : getTotalCartAmount()}
+              </b>
             </div>
-            
           </div>
-          <button onClick={() => navigate('/order')}>PROCEED TO CHECKOUT</button>
-          
+          <button onClick={() => navigate("/order")}>
+            PROCEED TO CHECKOUT
+          </button>
         </div>
         <div className="cart-promocode">
-            <div>
-              <p>If you have a promo code, Enter it here</p>
-              <div className="cart-promocode-input">
-                <input type="text" placeholder="promo code" />
-                <button>Submit</button>
-
-              </div>
+          <div>
+            <p>If you have a promo code, Enter it here</p>
+            <div className="cart-promocode-input">
+              <input type="text" placeholder="promo code" />
+              <button>Submit</button>
             </div>
           </div>
+        </div>
       </div>
     </div>
   );
